@@ -1,16 +1,38 @@
-# github_issues_app
+# GitHub Issues Viewer
 
-A new Flutter project.
+A Flutter app that loads the issues of a GitHub repository from the GitHub REST API and lets you filter them by label.
 
-## Getting Started
+## Features
+- Fetches issues from `api.github.com/repos/{owner}/{repo}/issues`
+- Search box that filters issues by label ID, with an empty-state message when nothing matches
+- Human-readable created dates
+- Central error handling with typed exceptions and an error controller
 
-This project is a starting point for a Flutter application.
+## Tech stack
+- **Flutter / Dart**
+- **GetX** for state, routing and dependency bindings
+- `intl` for date formatting
 
-A few resources to get you started if this is your first Flutter project:
+## Architecture
+```
+lib/
+├── core/
+│   ├── errors/     # AppException types + ErrorController
+│   └── utils/      # date formatting, initial bindings
+├── data/
+│   ├── api/        # ApiClient
+│   ├── models/     # issue response model
+│   └── services/   # IssueRepository behind an interface
+├── presentation/   # home screen: view, controller, components
+└── routes/
+```
+The UI uses a repository interface, not the HTTP client directly, so you can swap the data source or mock it in tests.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Run it
+```bash
+flutter pub get
+flutter run
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Author
+**Md Junaed Abed**: [Portfolio](https://abed-page.vercel.app) · [GitHub](https://github.com/JunaedAbed)
